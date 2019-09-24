@@ -1,0 +1,23 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+movie-api/node_modules
+movie-api/.pnp
+movie-api.pnp.js
+
+movie-api# testing
+movie-api/coverage
+
+movie-api# production
+movie-api/build
+
+movie-api# misc
+movie-api.DS_Store
+movie-api.env.local
+movie-api.env.development.local
+movie-api.env.test.local
+movie-api.env.production.local
+
+movie-apinpm-debug.log*
+movie-apiyarn-debug.log*
+movie-apiyarn-error.log*
