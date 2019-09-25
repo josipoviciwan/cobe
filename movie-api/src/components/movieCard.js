@@ -21,7 +21,7 @@ function MovieCard({ movie }) {
     // console.log(movie);
   });
   return (
-    <div className="col col-12  col-md-6 col-xl-4 p-4">
+    <div className="col col-12  col-md-6 col-lg-4 col-xl-3 p-4">
       <Link to={"/movie/" + movie.id}>
         <div className="card h-100 ">
           <img
