@@ -12,17 +12,16 @@ function App() {
       })
       .then(data => {
         console.log("New guest token fetched")
-        sessionStorage.setItem("guestToken", JSON.stringify(data));
+        localStorage.setItem("guestToken", JSON.stringify(data));
       });
   };
 
   useEffect(() => {
-    let token = JSON.parse(sessionStorage.getItem("guestToken"));
+    let token = JSON.parse(localStorage.getItem("guestToken"));
     if (token) {
       let dateString = token.expires_at;
       let expireDate = new Date(dateString);
       let currDate = new Date();
-
       if (expireDate < currDate) {
         fetchGuestToken();
       }

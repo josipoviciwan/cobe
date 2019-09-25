@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-
+import { RatingComponent } from "./";
 function MovieDetails(props) {
   const [movie, fetchMovie] = useState({});
   useEffect(() => {
@@ -29,7 +29,8 @@ function MovieDetails(props) {
     backdrop_path,
     vote_average,
     popularity,
-    production_companies
+    production_companies,
+    id
   } = movie;
   return Object.keys(movie).length === 0 ? (
     <div>Loading...</div>
@@ -45,6 +46,7 @@ function MovieDetails(props) {
         alt="..."
       />
       <div>{overview}</div>
+
       <p>
         Rating: {vote_average} <br />
         Popularity: {popularity} <br />
@@ -54,6 +56,7 @@ function MovieDetails(props) {
           i === production_companies.length - 1 ? name : name + ", "
         )}
       </p>
+      <RatingComponent vote_average={vote_average} id={id}></RatingComponent>
     </div>
   );
 }
