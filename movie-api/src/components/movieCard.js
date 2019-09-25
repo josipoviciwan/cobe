@@ -1,5 +1,6 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+
 const ratingStyle = {
   width: "80px",
   height: "80px",
@@ -16,14 +17,38 @@ const ratingStyle = {
   fontWeight: "bold"
 };
 
+const linkStyle = {
+  textDecoration: "none",
+  color: "black"
+};
+const linkStyleHover = {
+  textDecoration: "none",
+  color: "#606060"
+};
 function MovieCard({ movie }) {
+  const [hover, setHover] = useState(false);
   useEffect(() => {
     // console.log(movie);
   });
+  function handleHover() {
+    setHover(hover => !hover);
+  }
+
   return (
-    <div className="col col-12  col-md-6 col-lg-4 col-xl-3 p-4">
-      <Link to={"/movie/" + movie.id}>
-        <div className="card h-100 ">
+    <div
+      className={
+        "col col-12  col-md-6 col-lg-4 col-xl-3 " + (hover ? "p-2" : "p-1")
+      }
+    >
+      <Link
+        to={"/movie/" + movie.id}
+        style={hover ? linkStyleHover : linkStyle}
+      >
+        <div
+          className="card h-100 "
+          onMouseEnter={handleHover}
+          onMouseLeave={handleHover}
+        >
           <img
             src={"https://image.tmdb.org/t/p/w500" + movie.poster_path}
             className="card-img-top"
