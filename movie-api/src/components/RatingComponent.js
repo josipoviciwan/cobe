@@ -1,10 +1,31 @@
 import React, { useState, useEffect } from "react";
 import StarRatings from "react-star-ratings";
-const axios = require("axios");
+// const axios = require("axios");
 function RatingComponent({ vote_average, id }) {
   const [rating, setRating] = useState(0);
   let token = JSON.parse(localStorage.getItem("guestToken"));
   console.log("TOKEN: ", token);
+
+  function deleteRating() {
+    fetch(
+      "https://api.themoviedb.org/3/movie/" +
+        id +
+        "/rating?api_key=f57efe1486f26a1000ecc7f73ebf0005&guest_session_id=" +
+        token.guest_session_id,
+      {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" }
+      }
+    )
+      .then(res => res.text()) // OR res.json()
+      .then(res => {
+        console.log(res);
+        setRating(() => 0);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }
 
   function handleChange(newRating) {
     console.log("TREBALO BI BITI: ", newRating);
@@ -36,7 +57,7 @@ function RatingComponent({ vote_average, id }) {
       {
         method: "POST", // *GET, POST, PUT, DELETE, etc.
         mode: "cors", // no-cors, *cors, same-origin
-        cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+        cache: "no-store", // *default, no-cache, reload, force-cache, only-if-cached
         credentials: "same-origin", // include, *same-origin, omit
         headers: {
           "Content-Type": "application/json"
@@ -90,6 +111,9 @@ function RatingComponent({ vote_average, id }) {
         numberOfStars={10}
         name="rating"
       ></StarRatings>
+      <button className="btn btn-dark" onClick={deleteRating}>
+        Delete rating
+      </button>
     </div>
   );
 }

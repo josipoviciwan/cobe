@@ -17,7 +17,7 @@ function MainScreen() {
 
   const fetchPage = pageNum =>
     fetch(
-      "https://api.themoviedb.org/3/movie/popular?api_key=f57efe1486f26a1000ecc7f73ebf0005&language=en-US&page=" +
+      "https://api.themoviedb.org/3/movie/top_rated?api_key=f57efe1486f26a1000ecc7f73ebf0005&language=en-US&page=" +
         pageNum
     )
       .then(result => {
