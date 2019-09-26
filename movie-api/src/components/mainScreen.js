@@ -1,16 +1,27 @@
 import React, { useState, useEffect } from "react";
-import { MovieCard } from "./";
+import { MovieCard, MovieModal } from "./";
 
 const btnStyle = {
-  borderRadius: "100%",
-  width: "60px",
-  height: "60px"
+  position: "fixed",
+  right: "10px",
+  bottom: "10px",
+  zIndex: "1",
+  border: "10px solid black",
+  color: "black",
+  fontWeight: "bold"
 };
 
-function MainScreen() {
+function MainScreen(props) {
   const [page, setPage] = useState(1);
   const [movieData, setMovieData] = useState([]);
-
+  const [showModal, setShowModal] = useState(false);
+  
+  function hideModal() {
+    setShowModal(() => false);
+  }
+  function displayModal() {
+    setShowModal(() => true);
+  }
   const handlePage = () => {
     fetchPage(page + 1);
   };
@@ -36,18 +47,26 @@ function MainScreen() {
   });
   return movieData.length ? (
     <div className="text-center">
+      <button
+        className="btn btn-warning "
+        style={btnStyle}
+        type="button"
+        onClick={displayModal}
+      >
+        RANDOM
+      </button>
+      <MovieModal
+        show={showModal}
+        hideModal={hideModal}
+        history={props.history}
+      ></MovieModal>
       <div className="row">
         {movieData.map(movie => (
           <MovieCard key={movie.id} movie={movie}></MovieCard>
         ))}
       </div>
-      <button
-        type="button"
-        className="btn btn-dark "
-        style={btnStyle}
-        onClick={handlePage}
-      >
-        Load
+      <button type="button" className="btn btn-dark my-5 " onClick={handlePage}>
+        Load more . . .
       </button>
     </div>
   ) : (

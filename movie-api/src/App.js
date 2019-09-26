@@ -3,6 +3,7 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 import { MovieDetails, MainScreen } from "./components";
 
 function App() {
+ 
   let fetchGuestToken = () => {
     fetch(
       "https://api.themoviedb.org/3/authentication/guest_session/new?api_key=f57efe1486f26a1000ecc7f73ebf0005"
@@ -11,7 +12,7 @@ function App() {
         return resp.json();
       })
       .then(data => {
-        console.log("New guest token fetched")
+        console.log("New guest token fetched");
         localStorage.setItem("guestToken", JSON.stringify(data));
       });
   };
@@ -39,7 +40,11 @@ function App() {
         </Switch>
       </main>
 
-      <footer> This is a Cobe app</footer>
+      <footer>
+        <div className="container text-center">
+          This is a Cobe job application app &copy;{" "}
+        </div>{" "}
+      </footer>
     </BrowserRouter>
   );
 }

@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import { RatingComponent } from "./";
 function MovieDetails(props) {
   const [movie, fetchMovie] = useState({});
+
   useEffect(() => {
-    // if (!movieData.length) fetchPage(page);
     if (Object.keys(movie).length === 0)
       fetch(
         "https://api.themoviedb.org/3/movie/" +
@@ -20,7 +20,7 @@ function MovieDetails(props) {
           console.log(err);
         });
   });
-  // language and production companies
+
   let {
     title,
     release_date,
@@ -30,7 +30,8 @@ function MovieDetails(props) {
     vote_average,
     popularity,
     production_companies,
-    id
+    id,
+    poster_path
   } = movie;
   return Object.keys(movie).length === 0 ? (
     <div>Loading...</div>
@@ -39,15 +40,19 @@ function MovieDetails(props) {
       <h1>
         {title} ({release_date.slice(0, 4)})
       </h1>
-      {console.log(movie)}
-      <img
-        src={"https://image.tmdb.org/t/p/w500" + backdrop_path}
-        className="card-img-top"
-        alt="..."
-      />
-      <div>{overview}</div>
+      <object
+        data={"https://image.tmdb.org/t/p/w500" + backdrop_path}
+        className="w-100"
+        type="image/png"
+      >
+        <img
+          src={"https://image.tmdb.org/t/p/w500" + poster_path}
+          className="w-100"
+          alt="..."
+        />
+      </object>
 
-      <p>
+      <p style={{ fontWeight: "strong", fontSize: "20px" }}>
         Rating: {vote_average} <br />
         Popularity: {popularity} <br />
         Language: {original_language} <br />
@@ -56,6 +61,8 @@ function MovieDetails(props) {
           i === production_companies.length - 1 ? name : name + ", "
         )}
       </p>
+
+      <div>{overview}</div>
       <RatingComponent vote_average={vote_average} id={id}></RatingComponent>
     </div>
   );

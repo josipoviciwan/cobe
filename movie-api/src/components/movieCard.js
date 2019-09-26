@@ -49,7 +49,7 @@ function MovieCard({ movie }) {
         >
           <img
             src={"https://image.tmdb.org/t/p/w500" + movie.poster_path}
-            className="card-img-top"
+            className="card-img-top rounded-0"
             alt="..."
           ></img>
           <div className="" style={ratingStyle}>

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import StarRatings from "react-star-ratings";
-// const axios = require("axios");
+
 function RatingComponent({ vote_average, id }) {
   const [rating, setRating] = useState(0);
   let token = JSON.parse(localStorage.getItem("guestToken"));
@@ -17,7 +17,7 @@ function RatingComponent({ vote_average, id }) {
         headers: { "Content-Type": "application/json" }
       }
     )
-      .then(res => res.text()) // OR res.json()
+      .then(res => res.text())
       .then(res => {
         console.log(res);
         setRating(() => 0);
@@ -28,26 +28,6 @@ function RatingComponent({ vote_average, id }) {
   }
 
   function handleChange(newRating) {
-    //OVO RADI
-    // axios
-    //   .post(
-    //     "https://api.themoviedb.org/3/movie/" +
-    //       id +
-    //       "/rating?api_key=f57efe1486f26a1000ecc7f73ebf0005&guest_session_id=" +
-    //       token.guest_session_id,
-    //     {
-    //       value: newRating
-    //     },
-    //     { cache: "no-store" }
-    //   )
-    //   .then(function(response) {
-    //     console.log(response);
-    //     setRating(() => newRating);
-    //   })
-    //   .catch(function(error) {
-    //     console.log(error);
-    //   });
-
     fetch(
       "https://api.themoviedb.org/3/movie/" +
         id +
@@ -79,7 +59,6 @@ function RatingComponent({ vote_average, id }) {
   }
 
   function loadInitial() {
-    // OVO RADII SIGURNO
     fetch(
       "https://api.themoviedb.org/3/guest_session/" +
         token.guest_session_id +
@@ -99,15 +78,18 @@ function RatingComponent({ vote_average, id }) {
     }
   });
   return (
-    <div>
+    <div className="py-5">
       <StarRatings
         rating={rating}
-        starRatedColor="yellow"
+        starRatedColor="red"
         changeRating={handleChange}
         numberOfStars={10}
         name="rating"
+        starDimension="30px"
+        starSpacing="5px"
       ></StarRatings>
-      <button className="btn btn-dark" onClick={deleteRating}>
+      <bR></bR>
+      <button className="btn btn-danger my-5" onClick={deleteRating}>
         Delete rating
       </button>
     </div>
