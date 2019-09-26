@@ -27,9 +27,7 @@ const linkStyleHover = {
 };
 function MovieCard({ movie }) {
   const [hover, setHover] = useState(false);
-  useEffect(() => {
-    // console.log(movie);
-  });
+  useEffect(() => {});
   function handleHover() {
     setHover(hover => !hover);
   }

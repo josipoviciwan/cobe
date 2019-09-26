@@ -9,7 +9,7 @@ movie-api# testing
 movie-api/coverage
 
 movie-api# production
-movie-api/build
+# movie-api/build
 
 movie-api# misc
 movie-api.DS_Store

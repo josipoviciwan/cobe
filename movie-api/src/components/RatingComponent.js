@@ -28,7 +28,6 @@ function RatingComponent({ vote_average, id }) {
   }
 
   function handleChange(newRating) {
-    console.log("TREBALO BI BITI: ", newRating);
     //OVO RADI
     // axios
     //   .post(
@@ -89,7 +88,6 @@ function RatingComponent({ vote_average, id }) {
     )
       .then(resp => resp.json())
       .then(data => {
-        console.log(data);
         let movieList = [...data.results.filter(movie => movie.id === id)];
         if (movieList.length) setRating(movieList[0].rating);
       })
@@ -97,13 +95,11 @@ function RatingComponent({ vote_average, id }) {
   }
   useEffect(() => {
     if (rating === 0) {
-      console.log("UCITAVAM...");
       loadInitial();
     }
   });
   return (
     <div>
-      This is a rating comp.{rating}
       <StarRatings
         rating={rating}
         starRatedColor="yellow"
