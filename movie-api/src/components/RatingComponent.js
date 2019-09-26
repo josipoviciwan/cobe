@@ -4,7 +4,6 @@ import StarRatings from "react-star-ratings";
 function RatingComponent({ vote_average, id }) {
   const [rating, setRating] = useState(0);
   let token = JSON.parse(localStorage.getItem("guestToken"));
-  console.log("TOKEN: ", token);
 
   function deleteRating() {
     fetch(
@@ -18,8 +17,7 @@ function RatingComponent({ vote_average, id }) {
       }
     )
       .then(res => res.text())
-      .then(res => {
-        console.log(res);
+      .then(() => {
         setRating(() => 0);
       })
       .catch(err => {
@@ -49,8 +47,7 @@ function RatingComponent({ vote_average, id }) {
         }) // body data type must match "Content-Type" header
       }
     )
-      .then(function(response) {
-        console.log(response);
+      .then(() => {
         setRating(() => newRating);
       })
       .catch(function(error) {
@@ -85,8 +82,8 @@ function RatingComponent({ vote_average, id }) {
         changeRating={handleChange}
         numberOfStars={10}
         name="rating"
-        starDimension="30px"
-        starSpacing="5px"
+        starDimension="25px"
+        starSpacing="2px"
       ></StarRatings>
       <bR></bR>
       <button className="btn btn-danger my-5" onClick={deleteRating}>
